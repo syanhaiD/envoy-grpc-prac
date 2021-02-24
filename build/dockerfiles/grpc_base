@@ -1,0 +1,21 @@
+FROM alpine:3.13.2
+
+LABEL maintainer="https://github.com/syanhaid"
+
+WORKDIR /work
+
+RUN set -x && \
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    apk update && \
+    apk --no-cache add wget ca-certificates && \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub  && \
+    wget -P /tmp/ https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-2.33-r0.apk  && \
+    apk add /tmp/glibc-2.33-r0.apk  && \
+    wget -P /tmp/ https://dl.google.com/go/go1.15.linux-amd64.tar.gz && \
+    tar -C /usr/local/ -xzf /tmp/go1.15.linux-amd64.tar.gz && \
+    rm -f /tmp/go1.15.linux-amd64.tar.gz && \
+    mkdir -p /opt/proto && \
+    wget -P /opt/proto https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/protoc-3.14.0-linux-x86_64.zip && \
+    unzip /opt/proto/protoc-3.14.0-linux-x86_64.zip -d /opt/proto/ && \
+    rm -f /opt/proto/protoc-3.14.0-linux-x86_64.zip && \
+    chmod 755 /opt/proto/bin/protoc

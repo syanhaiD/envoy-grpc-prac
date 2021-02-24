@@ -1,0 +1,15 @@
+FROM envoy-grpc-prac/go_base:v1.00
+
+LABEL maintainer="https://github.com/syanhaid"
+
+WORKDIR /work
+
+COPY . .
+
+RUN set -x && \
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    cd cmd/verify/ && \
+    /usr/local/go/bin/go build -o ../../main
+
+EXPOSE 25000
+CMD ["/work/main"]
