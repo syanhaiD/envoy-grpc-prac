@@ -8,7 +8,7 @@ COPY . .
 
 RUN set -x && \
     echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
-    cd cmd/verify/ && \
+    cd cmd/http/ && \
     /usr/local/go/bin/go build -o ../../main
 
 EXPOSE 25000
