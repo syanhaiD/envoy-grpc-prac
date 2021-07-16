@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package verify;
+
+option go_package = ".;verify";
+
+service Verify {
+  rpc BiDirectional (stream BiRequest) returns (stream BiResponse) {}
+}
+
+message BiRequest {
+  string free1 = 1;
+  Packet1 p1 = 2;
+  Packet2 p2 = 3;
+}
+
+message Packet1 {
+  float free1 = 1;
+  float free2 = 2;
+  float free3 = 3;
+}
+
+message Packet2 {
+  string free1 = 1;
+  int64 free2 = 2;
+}
+
+message BiResponse {
+  string free1 = 1;
+  int32 free2 = 2;
+  Packet1 p1 = 3;
+  Packet2 p2 = 4;
+}
