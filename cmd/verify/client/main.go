@@ -37,7 +37,7 @@ func exec() int {
 	// recv
 	/*
 	for _, gConn := range grpcConns {
-		go func(c pbfgl.Fgl_BiDirectionalClient) {
+		go func(c pb.Verify_BiDirectionalClient) {
 			for {
 				resp, err := c.Recv()
 				if err == io.EOF {
@@ -45,7 +45,7 @@ func exec() int {
 					break
 				}
 				if err != nil {
-					fmt.Println("server EOF")
+					fmt.Println(err)
 					break
 				}
 				fmt.Println(resp)
